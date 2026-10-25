@@ -1,0 +1,10 @@
+node_modules/
+dist/
+release/
+.vite/
+*.log
+.env*
+!.env.example
+*.asar
+*.blockmap
+

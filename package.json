@@ -1,0 +1,66 @@
+{
+  "name": "nour-pdf",
+  "productName": "Nour PDF",
+  "version": "0.1.0",
+  "description": "An independent, open-source PDF reader with an Arabic interface.",
+  "author": "Nour PDF contributors",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "main.cjs",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "start": "electron .",
+    "dist": "npm run build && electron-builder --win nsis --x64"
+  },
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "26.15.3",
+    "pdfjs-dist": "^6.4.299",
+    "vite": "8.3.5"
+  },
+  "build": {
+    "appId": "org.nourpdf.reader",
+    "productName": "Nour PDF",
+    "asar": true,
+    "files": [
+      "dist/**/*",
+      "main.cjs",
+      "preload.cjs",
+      "package.json",
+      "LICENSE",
+      "THIRD-PARTY-NOTICES.md"
+    ],
+    "extraResources": [
+      {
+        "from": "licenses",
+        "to": "licenses"
+      }
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Nour-PDF-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Nour PDF"
+    }
+  }
+}
+

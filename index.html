@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' data: blob:; object-src 'none'; base-uri 'none'; frame-src 'none'" />
+    <meta name="theme-color" content="#10131a" />
+    <title>نور PDF</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="نور PDF - الصفحة الرئيسية">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M8 3.8h10l7 7V27a1.2 1.2 0 0 1-1.2 1.2H8A1.2 1.2 0 0 1 6.8 27V5A1.2 1.2 0 0 1 8 3.8Z"/><path d="M18 4v7h7M11 17h9M11 21h9M11 25h6"/></svg></span>
+          <span class="brand-copy"><strong>نور</strong><span>قارئ المستندات</span></span>
+        </a>
+        <div class="document-name" id="documentName" title="لم يتم فتح ملف">لا يوجد مستند مفتوح</div>
+        <button class="open-button" id="openButton" type="button"><span aria-hidden="true">＋</span> فتح ملف</button>
+      </header>
+
+      <main class="workspace">
+        <aside class="rail" aria-label="أدوات المستند">
+          <button class="rail-button active" type="button" aria-label="الصفحات" title="الصفحات"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></button>
+          <span class="rail-divider"></span>
+          <button class="rail-button" id="themeButton" type="button" aria-label="تغيير السمة" title="تغيير السمة"><svg viewBox="0 0 24 24"><path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.6 8.6 0 1 0 20.5 15.2Z"/></svg></button>
+          <div class="rail-bottom"><span class="version-mark">ن</span></div>
+        </aside>
+
+        <section class="viewer-column" aria-label="عارض PDF">
+          <div class="toolbar">
+            <div class="toolbar-group page-controls" aria-label="التنقل بين الصفحات">
+              <button class="icon-button" id="prevPage" type="button" title="الصفحة السابقة" aria-label="الصفحة السابقة" disabled><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+              <label class="page-counter"><input id="pageInput" value="—" aria-label="رقم الصفحة" disabled><span>/</span><span id="pageTotal">—</span></label>
+              <button class="icon-button" id="nextPage" type="button" title="الصفحة التالية" aria-label="الصفحة التالية" disabled><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+            <span class="toolbar-divider"></span>
+            <div class="toolbar-group zoom-controls" aria-label="التكبير">
+              <button class="icon-button" id="zoomOut" type="button" title="تصغير" aria-label="تصغير" disabled><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="M6.8 10.8h8M16 16l4.5 4.5"/></svg></button>
+              <span class="zoom-value" id="zoomValue">ملاءمة</span>
+              <button class="icon-button" id="zoomIn" type="button" title="تكبير" aria-label="تكبير" disabled><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="M6.8 10.8h8M10.8 6.8v8M16 16l4.5 4.5"/></svg></button>
+            </div>
+            <span class="toolbar-divider"></span>
+            <form class="find-box" id="findForm" role="search"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="findInput" type="search" placeholder="ابحث في المستند" aria-label="ابحث في المستند" disabled><span id="findCount" class="find-count"></span></form>
+            <div class="toolbar-spacer"></div>
+            <button class="icon-button save-button" id="saveButton" type="button" title="حفظ نسخة" aria-label="حفظ نسخة" disabled><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 17v3h14v-3"/></svg></button>
+          </div>
+
+          <div class="viewer-viewport" id="viewerViewport">
+            <div class="welcome" id="welcome">
+              <div class="welcome-glow"></div>
+              <div class="welcome-icon"><svg viewBox="0 0 64 64"><path d="M16 7h20l13 13v35a2 2 0 0 1-2 2H16a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M36 8v13h12M22 32h19M22 40h19M22 48h13"/></svg></div>
+              <p class="eyebrow">مساحة هادئة لملفاتك</p>
+              <h1>اقرأ على راحتك</h1>
+              <p class="welcome-text">افتح ملف PDF وابدأ القراءة. ملفاتك تبقى على جهازك.</p>
+              <button class="welcome-open" id="welcomeOpen" type="button"><span>＋</span> اختر ملفًا للبدء</button>
+              <p class="shortcut-hint">أو اضغط <kbd>Ctrl</kbd> + <kbd>O</kbd></p>
+            </div>
+            <div class="document-stage" id="documentStage" hidden></div>
+            <div class="loading-indicator" id="loadingIndicator" hidden><span class="spinner"></span><span id="loadingText">جارٍ فتح المستند…</span></div>
+            <div class="toast" id="toast" role="status" aria-live="polite"></div>
+          </div>
+          <footer class="statusbar"><span id="statusLeft">جاهز لفتح ملف PDF</span><span id="statusRight">يُعالج المستند محليًا على جهازك</span></footer>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+
